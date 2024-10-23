@@ -8,6 +8,6 @@ TRUSTED_SHELL=ssh
 CHECK_POINT_SEGMENTS=8
 ENCODING=UNICODE
 
-# Включить зеркала
-#MIRROR_PORT_BASE=7000
-#MIRROR_DATA_DIRECTORY=/data/mirror
+# Включить/выключить зеркала
+MIRROR_PORT_BASE=7000
+declare -a MIRROR_DATA_DIRECTORY=(/data/mirror /data/mirror)

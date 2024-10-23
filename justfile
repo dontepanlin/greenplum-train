@@ -2,6 +2,8 @@ build:
     docker build -t greenplum .
 start: build
     docker-compose up -d
+start target:
+    docker-compose up -d target
 stop:
     docker-compose down
 restart: stop start
