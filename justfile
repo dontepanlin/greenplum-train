@@ -1,3 +1,7 @@
+default:
+    @just --list
+
+
 build:
     docker build -t greenplum .
 start: build
@@ -36,3 +40,4 @@ kill-coordinator:
 
 kill-primary target:
     docker compose kill {{target}}
+
