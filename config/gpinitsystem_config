@@ -1,0 +1,13 @@
+SEG_PREFIX=gpseg
+PORT_BASE=6000 
+declare -a DATA_DIRECTORY=(/data/primary /data/primary)
+MASTER_HOSTNAME=coordinator
+MASTER_DIRECTORY=/data/master 
+MASTER_PORT=5432 
+TRUSTED_SHELL=ssh
+CHECK_POINT_SEGMENTS=8
+ENCODING=UNICODE
+
+# Включить зеркала
+#MIRROR_PORT_BASE=7000
+#MIRROR_DATA_DIRECTORY=/data/mirror

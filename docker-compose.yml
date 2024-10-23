@@ -1,0 +1,65 @@
+services:
+  coordinator:
+    image: greenplum
+    hostname: coordinator
+    environment:
+      - MASTER_DATA_DIRECTORY=/data/master/gpseg-1
+      - PGPORT=5432
+    networks:
+      mynet:
+        ipv4_address: 10.10.1.2
+    volumes:
+      - ./ssh/master:/home/gpadmin/.ssh
+      - ./data/master:/data/master
+      - ./config/hostfile_exkeys:/home/gpadmin/hostfile_exkeys
+      - ./config/gpinitsystem_config:/home/gpadmin/gpinitsystem_config
+      - ./config/hostfile_gpinitsystem:/home/gpadmin/hostfile_gpinitsystem
+  standby:
+    image: greenplum
+    hostname: standby
+    environment:
+      - MASTER_DATA_DIRECTORY=/data/master/gpseg-1
+      - PGPORT=5432
+    networks:
+      mynet:
+        ipv4_address: 10.10.1.3
+    volumes:
+      - ./ssh/standby:/home/gpadmin/.ssh
+      - ./data/standby:/data/master
+  data1:
+    image: greenplum
+    hostname: data1
+    networks:
+      mynet:
+        ipv4_address: 10.10.1.4
+    volumes:
+      - ./ssh/data1:/home/gpadmin/.ssh
+      - ./data/data1:/data/primary
+      - ./data/mirror1:/data/mirror
+  data2:
+    image: greenplum
+    hostname: data2
+    networks:
+      mynet:
+        ipv4_address: 10.10.1.5
+    volumes:
+      - ./ssh/data2:/home/gpadmin/.ssh
+      - ./data/data2:/data/primary
+      - ./data/mirror2:/data/mirror
+  data3:
+    image: greenplum
+    hostname: data3
+    networks:
+      mynet:
+        ipv4_address: 10.10.1.6
+    volumes:
+      - ./ssh/data3:/home/gpadmin/.ssh
+      - ./data/data3:/data/primary
+      - ./data/mirror3:/data/mirror
+
+networks:
+  mynet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.1.0/24
