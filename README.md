@@ -30,7 +30,7 @@
 
 Команды выполняются на мастере
 
-1. `bash /init_master.ssh` - устанавливает ssh без пароля между всеми узлами greenplum
+1. `bash /init_master.sh` - устанавливает ssh без пароля между всеми узлами greenplum
 2. `gpinitsystem -c ./gpinitsystem_config -h hostfile_gpinitsystem -s standby` - можно убрать параметр standby.
 3. Проверить запущенный кластер: `gpstate`
 

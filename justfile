@@ -3,7 +3,7 @@ build:
 start: build
     docker-compose up -d
 start-one target:
-    docker-compose up -d target
+    docker-compose up -d {{target}}
 stop:
     docker-compose down
 restart: stop start
