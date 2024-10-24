@@ -12,6 +12,9 @@ stop:
     docker-compose down
 restart: stop start
 
+shell target:
+    -docker compose exec -it {{target}} bash
+
 clean-ssh:
     -sudo rm -r ./ssh/data1
     -sudo rm -r ./ssh/data2 
@@ -38,6 +41,6 @@ clean-data:
 kill-coordinator:
     docker compose kill coordinator
 
-kill-primary target:
+kill target:
     docker compose kill {{target}}
 
