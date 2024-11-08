@@ -4,6 +4,7 @@ RUN yum install -y python39 python2 epel-release
 RUN yum install -y htop sudo sshpass procps
 COPY ./rpm/open-source-greenplum-db-6-6.27.1-1.el8.x86_64.rpm ./greenplum.rpm
 RUN dnf install -y ./greenplum.rpm
+RUN yum install -y postgresql-contrib
 RUN groupadd gpadmin
 RUN useradd gpadmin -r -m -g gpadmin
 RUN echo "gpadmin:gpadmin" | chpasswd

@@ -56,7 +56,12 @@ services:
       - ./ssh/data3:/home/gpadmin/.ssh
       - ./data/data3:/data/primary
       - ./data/mirror3:/data/mirror
-
+  bench:
+    image: greenplum
+    hostname: bench
+    networks:
+      mynet:
+        ipv4_address: 10.10.1.7
 networks:
   mynet:
     driver: bridge

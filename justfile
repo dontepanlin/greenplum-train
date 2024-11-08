@@ -15,6 +15,9 @@ restart: stop start
 shell target:
     -docker compose exec -it {{target}} bash
 
+load +ARGS:
+    docker compose exec bench pgbench {{ARGS}}
+
 clean-ssh:
     -sudo rm -r ./ssh/data1
     -sudo rm -r ./ssh/data2 
