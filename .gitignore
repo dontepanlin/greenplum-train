@@ -1,3 +1,7 @@
 data/
 ssh/
 .vscode/
+gpdb/
+gp-xerces/
+deb/
+rpm/

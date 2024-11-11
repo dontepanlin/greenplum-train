@@ -1,0 +1,23 @@
+FROM ubuntu:jammy
+ENV DEBIAN_FRONTEND=NONINTERACTIVE
+COPY ./package/greenplum.deb /greenplum.deb
+RUN apt-get update
+RUN apt-get install -y /greenplum.deb
+RUN apt install -y sudo sshpass
+RUN adduser --gecos "" --disabled-password gpadmin
+RUN echo "gpadmin:gpadmin" | chpasswd
+RUN usermod -aG sudo gpadmin
+RUN chown -R gpadmin:gpadmin /usr/local/gpdb/*
+RUN chgrp -R gpadmin /usr/local/gpdb/*
+RUN echo 'gpadmin ALL=(ALL) NOPASSWD: ALL' | tee -a /etc/sudoers > /dev/null
+RUN ssh-keygen -A -t rsa -b 2048 -N ""
+COPY ./config/sshd_config /etc/ssh/sshd_config
+RUN mkdir /run/sshd
+RUN chmod 755 /run/sshd
+USER gpadmin
+EXPOSE 22
+WORKDIR /home/gpadmin
+COPY ./scripts/init.sh /init.sh
+COPY ./scripts/init_master.sh /init_master.sh
+RUN echo "source /usr/local/gpdb/greenplum_path.sh" > /home/gpadmin/.bashrc
+CMD [ "bash", "/init.sh" ]

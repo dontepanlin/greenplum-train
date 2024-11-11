@@ -1,9 +1,12 @@
 default:
     @just --list
 
+base_image := env('BASE_IMAGE', "centos")
+docker_file := if base_image == "centos" { "DockerfileCentos" } else { "DockerfileUbuntu" }
 
 build:
-    docker build -t greenplum .
+    docker build -t greenplum -f {{docker_file}} . 
+
 start: build
     docker-compose up -d
 start-one target:
