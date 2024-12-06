@@ -51,7 +51,7 @@
 2. Перегрузить pg_hba на мастере без рестарта: `gpstop -u`
 
 ## Имитация нагрузки
-1. Используется [pgbench](https://www.postgresql.org/docs/current/pgbench.html)
+1. Используется [pgbench](https://www.postgresql.org/docs/current/pgbench.md)
 2. pgbench установлен в образ и доступен для использования
 
 ## Сценарий потери мастера
